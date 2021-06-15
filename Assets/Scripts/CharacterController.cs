@@ -5,10 +5,10 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour
 {
     Rigidbody m_Rigidbody;
+    float m_JumpForce;
     float m_Speed;
     Vector2 m_Rotation = Vector2.zero;
     float m_LookSpeed;
-    float m_JumpForce;
     bool m_IsOnGround;
     // Start is called before the first frame update
     void Start()
@@ -17,6 +17,8 @@ public class CharacterController : MonoBehaviour
         m_Speed = 5.0f;
         m_LookSpeed = 3.0f;
         m_JumpForce = 5.0f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -74,7 +76,16 @@ public class CharacterController : MonoBehaviour
                 print("space was pressed");
                 m_Rigidbody.velocity = transform.up * m_JumpForce;
             }
+
+            
         } 
+        //sprint
+            if(Input.GetKeyDown(KeyCode.LeftShift)){
+                m_Speed = m_Speed * 2; 
+            }
+            else if(Input.GetKeyUp(KeyCode.LeftShift)){
+                m_Speed = m_Speed / 2;
+            }
     }
 
     void Look(){
