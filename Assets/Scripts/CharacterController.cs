@@ -10,6 +10,7 @@ public class CharacterController : MonoBehaviour
     Vector2 m_Rotation = Vector2.zero;
     float m_LookSpeed;
     bool m_IsOnGround;
+    public Vector3 moveDirection = Vector3.zero;
     // Start is called before the first frame update
     void Start()
     {
@@ -77,7 +78,7 @@ public class CharacterController : MonoBehaviour
                 m_Rigidbody.velocity = transform.up * m_JumpForce;
             }
 
-            
+            moveDirection = m_Rigidbody.velocity;
         } 
         //sprint
             if(Input.GetKeyDown(KeyCode.LeftShift)){
