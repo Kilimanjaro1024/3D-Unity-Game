@@ -7,15 +7,38 @@ public class Inventory : MonoBehaviour
     public List<Item> characterItems = new List<Item>();
     public ItemDatabase itemDatabase;
     public UIInventory inventoryUI;
+    public CharacterController controller;
 
     void Start(){
-        
+        controller = gameObject.GetComponent<CharacterController>();
         GiveItem(1);
         GiveItem(0);
         GiveItem(2);
-        // RemoveItem(2);
-        // RemoveItem(0);
-        
+        inventoryUI.gameObject.SetActive(false);
+    }
+
+    void Update()
+    {
+        UIController();
+    }
+
+    private void UIController()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            controller.enabled = !controller.enabled;
+            if (!controller.enabled)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            inventoryUI.gameObject.SetActive(!inventoryUI.gameObject.activeSelf);
+        }
     }
 
     public void GiveItem(int id){

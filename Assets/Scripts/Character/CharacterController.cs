@@ -25,6 +25,7 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         MovementController();
         Look();
     }
@@ -103,5 +104,7 @@ public class CharacterController : MonoBehaviour
     void OnTriggerExit(Collider other){
         m_IsOnGround = false;
     }
+
+    
 
 }
