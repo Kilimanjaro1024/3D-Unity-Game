@@ -31,11 +31,13 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     }
 
     private void Update(){
+        //FIX NULL REFERENCE ERRORS THAT OCCUR WHEN EQUIPPING ITEMS
         if(Input.GetKeyDown(KeyCode.E)){
             if(selected){
                 if(this.item.equipable){
                     if(!equipped){
                         CheckSlot();
+                        
                     }
                     else{
                         for (int i = 0; i < player.slots.Count; i++)
@@ -59,8 +61,10 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         for (int i = 0; i < player.slots.Count; i++){
             if(this.item.slot == player.slots[i].slotName){
                 if(!player.slots[i].filled){
+                    
                     player.slots[i].filled = true;
                     player.slots[i].item = this.item;     
+                    player.WearItem();
                     inventory.EquipItem(this.item.id);
                 }
                 else{
