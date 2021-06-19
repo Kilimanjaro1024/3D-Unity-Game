@@ -7,6 +7,7 @@ public class Inventory : MonoBehaviour
     public List<Item> characterItems = new List<Item>();
     public ItemDatabase itemDatabase;
     public UIInventory inventoryUI;
+    public UIEquipment equipmentUI;
     public CharacterController controller;
 
     void Start(){
@@ -55,19 +56,30 @@ public class Inventory : MonoBehaviour
         Debug.Log("Added item: " + itemToAdd.title);
     }
 
-      public Item CheckForItem(int id)
-    {
+    public Item CheckForItem(int id){
         return characterItems.Find(item => item.id == id);
     }
 
-    public void RemoveItem(int id)
-    {
+    public void RemoveItem(int id){
         Item itemToRemove = CheckForItem(id);
-        if (itemToRemove != null)
-        {
+        if (itemToRemove != null){
             characterItems.Remove(itemToRemove);
             inventoryUI.RemoveItem(itemToRemove);
             Debug.Log("Removed item: " + itemToRemove.title);
+        }
+    }
+
+    public void EquipItem(int id){
+        Item itemToEquip = CheckForItem(id);
+        if (itemToEquip != null){
+            inventoryUI.EquipItem(itemToEquip);
+        }
+    }
+
+    public void UnequipItem(int id){
+        Item itemToUnequip = CheckForItem(id);
+        if(itemToUnequip != null){
+            equipmentUI.UnequipItem(itemToUnequip);
         }
     }
 }

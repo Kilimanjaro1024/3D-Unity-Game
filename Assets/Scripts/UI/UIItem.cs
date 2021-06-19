@@ -15,6 +15,8 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     public GameObject prefab;
     private Transform dropLocation;
     
+    private bool selected;
+    public bool equipped;
 
     private void Awake(){
         spriteImage = GetComponent<Image>();
@@ -23,6 +25,20 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         tooltip = GameObject.Find("Tooltip").GetComponent<Tooltip>();
         inventory = GameObject.Find("Player").GetComponent<Inventory>();
         dropLocation = GameObject.Find("Drop Location").GetComponent<Transform>();
+        selected = false;
+    }
+
+    private void Update(){
+        if(Input.GetKeyDown(KeyCode.E)){
+            if(selected){
+                if(!equipped){
+                    inventory.EquipItem(this.item.id);
+                }
+                else{
+                    inventory.UnequipItem(this.item.id);
+                }
+            }
+        }
     }
 
     public void UpdateItem(Item item){
@@ -71,11 +87,13 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     public void OnPointerEnter(PointerEventData eventData){
         if(this.item != null){
             tooltip.GenerateTooltip(this.item);
+            selected = true;
         }
         
     }
     public void OnPointerExit(PointerEventData eventData){
         tooltip.gameObject.SetActive(false);
+        selected = false;
     }
    
 }
