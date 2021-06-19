@@ -33,6 +33,7 @@ public class UIInventory : MonoBehaviour
     }
 
     public void EquipItem(Item item){
+
         uIEquipment.AddNewItem(item);
         RemoveItem(item);
     }

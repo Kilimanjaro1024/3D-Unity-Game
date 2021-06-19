@@ -17,6 +17,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     
     private bool selected;
     public bool equipped;
+    public Player player;
 
     private void Awake(){
         spriteImage = GetComponent<Image>();
@@ -24,6 +25,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         selectedItem = GameObject.Find("SelectedItem").GetComponent<UIItem>();
         tooltip = GameObject.Find("Tooltip").GetComponent<Tooltip>();
         inventory = GameObject.Find("Player").GetComponent<Inventory>();
+        player = GameObject.Find("Player").GetComponent<Player>();
         dropLocation = GameObject.Find("Drop Location").GetComponent<Transform>();
         selected = false;
     }
@@ -31,11 +33,39 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     private void Update(){
         if(Input.GetKeyDown(KeyCode.E)){
             if(selected){
-                if(!equipped){
+                if(this.item.equipable){
+                    if(!equipped){
+                        CheckSlot();
+                    }
+                    else{
+                        for (int i = 0; i < player.slots.Count; i++)
+                        {
+                            if(this.item.slot == player.slots[i].slotName){
+                                player.slots[i].filled = false;
+                                player.slots[i].item = null;
+                                inventory.UnequipItem(this.item.id);
+                            }
+                        } 
+                    }
+                }
+                else{
+                    Debug.Log(this.item.title + " cannot be equiped.");
+                }
+            }
+        }        
+    }
+
+    private void CheckSlot(){
+        for (int i = 0; i < player.slots.Count; i++){
+            if(this.item.slot == player.slots[i].slotName){
+                if(!player.slots[i].filled){
+                    player.slots[i].filled = true;
+                    player.slots[i].item = this.item;     
                     inventory.EquipItem(this.item.id);
                 }
                 else{
-                    inventory.UnequipItem(this.item.id);
+                    //Add code to swap item clicked with currently equipped item
+                    Debug.Log("The " + player.slots[i].slotName + " is filled.");
                 }
             }
         }
