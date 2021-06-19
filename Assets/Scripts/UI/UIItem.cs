@@ -12,12 +12,17 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     private Tooltip tooltip;
     public Inventory inventory;
 
+    public GameObject prefab;
+    private Transform dropLocation;
+    
+
     private void Awake(){
         spriteImage = GetComponent<Image>();
         UpdateItem(null);
         selectedItem = GameObject.Find("SelectedItem").GetComponent<UIItem>();
         tooltip = GameObject.Find("Tooltip").GetComponent<Tooltip>();
         inventory = GameObject.Find("Player").GetComponent<Inventory>();
+        dropLocation = GameObject.Find("Drop Location").GetComponent<Transform>();
     }
 
     public void UpdateItem(Item item){
@@ -25,6 +30,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         if(this.item != null){
             spriteImage.color = Color.white;
             spriteImage.sprite = this.item.icon;
+            prefab = Resources.Load<GameObject>("Items/" + item.title);
             // Debug.Log(this.item.icon);
         }
         else{
@@ -57,6 +63,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
              if(this.item != null){
                 Debug.Log("Remove Item");
                 inventory.RemoveItem(item.id);
+                Instantiate(prefab, dropLocation.position , new Quaternion(0, 0, 0, 0));
             }
         }
     }

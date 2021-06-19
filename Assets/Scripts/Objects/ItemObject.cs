@@ -8,6 +8,9 @@ public class ItemObject : MonoBehaviour, IInteractable
     public int itemId;
     public Inventory inventory;
 
+    void Awake(){
+        inventory = GameObject.Find("Player").GetComponent<Inventory>();
+    }
 
     public string NameText{
         get{
