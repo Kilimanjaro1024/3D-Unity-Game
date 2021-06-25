@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
         WearItem();
     }
 
+    //Spawns the gameobject of an equipped item in the proper slot on the player.
     public void WearItem(){
         for (int i = 0; i < slots.Count; i++){
             if(slots[i].filled){
@@ -36,6 +37,4 @@ public class Player : MonoBehaviour
             }
         }
     }
-
-    
 }

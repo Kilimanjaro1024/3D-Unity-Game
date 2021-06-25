@@ -29,32 +29,58 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         selected = false;
     }
 
-    private void Update(){
+    private void Update()
+    {
         //FIX NULL REFERENCE ERRORS THAT OCCUR WHEN EQUIPPING ITEMS
-        if(Input.GetKeyDown(KeyCode.E)){
-            if(selected){
-                if(this.item.equipable){
-                    if(!equipped){
-                        CheckSlot();   
+        HandleInventory();
+    }
+
+    private void HandleInventory()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (selected)
+            {
+                if (this.item.equipable)
+                {
+                    if (!equipped)
+                    {
+                        HandleEquip();
                     }
-                    else{
-                        for (int i = 0; i < player.slots.Count; i++){
-                            if(this.item.slot == player.slots[i].slotName){
-                                player.slots[i].filled = false;
-                                player.slots[i].item = null;
-                                inventory.UnequipItem(this.item.id);
-                            }
-                        } 
+                    else
+                    {
+                        HandleUnequip();
                     }
                 }
-                else{
+                else
+                {
                     Debug.Log(this.item.title + " cannot be equiped.");
                 }
             }
-        }        
+        }
     }
 
-    private void CheckSlot(){
+    //When an item is unequipped this function takes care of setting the equipped state of the slot to false, removing the item script from the equipped list, Destroying the gameObject of the equipped Item
+    // and sends the item back to the inventory.
+    private void HandleUnequip()
+    {
+        for (int i = 0; i < player.slots.Count; i++)
+        {
+            if (this.item.slot == player.slots[i].slotName)
+            {
+                player.slots[i].filled = false;
+                player.slots[i].item = null;
+                GameObject item = GameObject.Find(player.slots[i].slotName).transform.GetChild(0).gameObject;
+                DestroyImmediate(item, true);
+                player.itemSlots[i] = null;
+                inventory.UnequipItem(this.item.id);
+            }
+        }
+    }
+
+    //When an Item is equipped this function checks if the item slot is filled and if not spawns the object in gamespace and adds it to the players equipment and removes it from the inventory UI.
+    //If the Slot is filled this function swaps the the currently equipped item with the item targeted for equipping.
+    private void HandleEquip(){
         for (int i = 0; i < player.slots.Count; i++){
             if(this.item.slot == player.slots[i].slotName){
                 if(!player.slots[i].filled){
@@ -64,7 +90,10 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
                     inventory.EquipItem(this.item.id);
                 }
                 else{
+                    GameObject item = GameObject.Find(player.slots[i].slotName).transform.GetChild(0).gameObject;
                     inventory.UnequipItem(player.slots[i].item.id);
+                    DestroyImmediate(item, true);
+                    player.itemSlots[i] = null;
                     player.slots[i].item = this.item;
                     inventory.EquipItem(this.item.id);
                     player.WearItem();
@@ -105,7 +134,6 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
                 selectedItem.UpdateItem(null);
             }    
         }
-
         //Remove an Item From the Iventory Menu
         if(eventData.button == PointerEventData.InputButton.Right){
              if(this.item != null){
