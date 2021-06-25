@@ -11,7 +11,6 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     private UIItem selectedItem;
     private Tooltip tooltip;
     public Inventory inventory;
-
     public GameObject prefab;
     private Transform dropLocation;
     
@@ -36,12 +35,10 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
             if(selected){
                 if(this.item.equipable){
                     if(!equipped){
-                        CheckSlot();
-                        
+                        CheckSlot();   
                     }
                     else{
-                        for (int i = 0; i < player.slots.Count; i++)
-                        {
+                        for (int i = 0; i < player.slots.Count; i++){
                             if(this.item.slot == player.slots[i].slotName){
                                 player.slots[i].filled = false;
                                 player.slots[i].item = null;
@@ -61,14 +58,16 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         for (int i = 0; i < player.slots.Count; i++){
             if(this.item.slot == player.slots[i].slotName){
                 if(!player.slots[i].filled){
-                    
                     player.slots[i].filled = true;
                     player.slots[i].item = this.item;     
                     player.WearItem();
                     inventory.EquipItem(this.item.id);
                 }
                 else{
-                    //Add code to swap item clicked with currently equipped item
+                    inventory.UnequipItem(player.slots[i].item.id);
+                    player.slots[i].item = this.item;
+                    inventory.EquipItem(this.item.id);
+                    player.WearItem();
                     Debug.Log("The " + player.slots[i].slotName + " is filled.");
                 }
             }
@@ -81,7 +80,6 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
             spriteImage.color = Color.white;
             spriteImage.sprite = this.item.icon;
             prefab = Resources.Load<GameObject>("Items/" + item.title);
-            // Debug.Log(this.item.icon);
         }
         else{
             spriteImage.color = Color.clear;

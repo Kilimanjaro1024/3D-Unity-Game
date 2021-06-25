@@ -25,8 +25,7 @@ public class Player : MonoBehaviour
     }
 
     public void WearItem(){
-        for (int i = 0; i < slots.Count; i++)
-        {
+        for (int i = 0; i < slots.Count; i++){
             if(slots[i].filled){
                 itemSlots[i] = Resources.Load<GameObject>("Items/" + slots[i].item.title);
                 GameObject item = Instantiate(itemSlots[i], GameObject.Find(slots[i].slotName).transform.position,  new Quaternion(0, 0, 0, 0));
@@ -37,5 +36,6 @@ public class Player : MonoBehaviour
             }
         }
     }
+
     
 }
