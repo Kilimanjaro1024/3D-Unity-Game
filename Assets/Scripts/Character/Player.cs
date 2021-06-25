@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     
     void Awake(){
         BuildSlots();
+
     }
 
     private void BuildSlots(){
@@ -32,9 +33,17 @@ public class Player : MonoBehaviour
                 GameObject item = Instantiate(itemSlots[i], GameObject.Find(slots[i].slotName).transform.position,  new Quaternion(0, 0, 0, 0));
                 item.transform.parent = GameObject.Find(slots[i].slotName).transform;
                 item.GetComponent<Rigidbody>().isKinematic = true;
-                item.GetComponent<Rigidbody>().freezeRotation = true;
-                item.GetComponent<BoxCollider>().enabled = false;
+                // item.GetComponent<Rigidbody>().freezeRotation = true;
+                item.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
+                // item.transform.GetChild(0).GetComponent<Rigidbody>().freezeRotation = true;
+                item.transform.GetChild(0).GetComponent<BoxCollider>().enabled = false;
             }
+        }
+    }
+
+    public void Attack(){
+        if(Input.GetButtonDown("Fire1")){
+
         }
     }
 }

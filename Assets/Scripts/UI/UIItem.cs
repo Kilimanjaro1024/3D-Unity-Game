@@ -24,7 +24,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         selectedItem = GameObject.Find("SelectedItem").GetComponent<UIItem>();
         tooltip = GameObject.Find("Tooltip").GetComponent<Tooltip>();
         inventory = GameObject.Find("Player").GetComponent<Inventory>();
-        player = GameObject.Find("Player").GetComponent<Player>();
+        player = GameObject.Find("Main Camera").GetComponent<Player>();
         dropLocation = GameObject.Find("Drop Location").GetComponent<Transform>();
         selected = false;
     }

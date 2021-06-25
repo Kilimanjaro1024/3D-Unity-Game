@@ -19,7 +19,7 @@ public class InteractLookedAtObject : MonoBehaviour
     }
 
     private void HandleInput(){
-        if(Input.GetButtonDown("Fire1")){
+        if(Input.GetKeyDown(KeyCode.F)){
             Debug.Log("Button Clicked");
             if(lookedAtObject != null){
                 lookedAtObject.DoActivate();
