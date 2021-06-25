@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 9010855981674408854}
   - component: {fileID: 6124911099808252163}
   - component: {fileID: 4277108936662818328}
-  - component: {fileID: 6954006820100351427}
   - component: {fileID: 7196310088355961654}
   m_Layer: 0
   m_Name: Diamond Sword
@@ -98,21 +97,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6954006820100351427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1155578985676432457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc2c18fb2533cd34e981ff3ae95529b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: Diamond Pick
-  itemId: 2
-  inventory: {fileID: 0}
 --- !u!54 &7196310088355961654
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -142,6 +126,7 @@ GameObject:
   - component: {fileID: 5234417428425229174}
   - component: {fileID: 5234417428425229173}
   - component: {fileID: 5234417428425229171}
+  - component: {fileID: 3132833046485183950}
   m_Layer: 3
   m_Name: Modle
   m_TagString: Untagged
@@ -241,3 +226,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3132833046485183950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5234417428425229170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc2c18fb2533cd34e981ff3ae95529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: Diamond Sword
+  itemId: 0
+  inventory: {fileID: 0}

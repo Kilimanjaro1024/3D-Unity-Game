@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8398046282856337753}
   - component: {fileID: 6667343329492089804}
   - component: {fileID: 3664928123196450007}
-  - component: {fileID: 7567946250035699468}
   - component: {fileID: 7663238407220283010}
   m_Layer: 0
   m_Name: Silver Pick
@@ -98,21 +97,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7567946250035699468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1841505678489771654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc2c18fb2533cd34e981ff3ae95529b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: Diamond Pick
-  itemId: 2
-  inventory: {fileID: 0}
 --- !u!54 &7663238407220283010
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -142,6 +126,7 @@ GameObject:
   - component: {fileID: 4693671877900466617}
   - component: {fileID: 4693671877900466618}
   - component: {fileID: 4693671877900466620}
+  - component: {fileID: 3132833046787127589}
   m_Layer: 3
   m_Name: Modle
   m_TagString: Untagged
@@ -241,3 +226,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3132833046787127589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4693671877900466621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc2c18fb2533cd34e981ff3ae95529b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: Silver Pick
+  itemId: 3
+  inventory: {fileID: 0}
