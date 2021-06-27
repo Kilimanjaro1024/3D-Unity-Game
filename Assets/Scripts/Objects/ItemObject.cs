@@ -8,9 +8,20 @@ public class ItemObject : MonoBehaviour, IInteractable
     public int itemId;
     public Inventory inventory;
     public bool swinging;
+    public Item item;
+    public ItemDatabase database;
+    public List<KeyValuePair<string, int>> stats = new List<KeyValuePair<string, int>>();
 
     void Awake(){
+        database = GameObject.Find("ItemDatabase").GetComponent<ItemDatabase>();
         inventory = GameObject.Find("Player").GetComponent<Inventory>();
+        item = database.GetItem(itemId);
+        
+        foreach (var stat in item.stats){
+            KeyValuePair<string, int> statToAdd = stat;
+            stats.Add(statToAdd);
+            Debug.Log(statToAdd.Key.ToString() + ": " + statToAdd.Value);
+        }
     }
 
     public string NameText{

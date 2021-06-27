@@ -9,10 +9,6 @@ public class MainHand : MonoBehaviour
     public bool strong;
     public ItemObject heldItem;
     
-    // void Awake(){
-    //     UpdateHeldItem();
-    // }
-    // Update is called once per frame
     void Update()
     {
         if(heldItem != null){
@@ -50,7 +46,6 @@ public class MainHand : MonoBehaviour
             else {
                 QuickAttack();
             }
-            // Anim.SetBool("swing", false);
             timer = 0;
         }
         else{

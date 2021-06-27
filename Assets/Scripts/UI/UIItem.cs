@@ -27,6 +27,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         player = GameObject.Find("Main Camera").GetComponent<Player>();
         dropLocation = GameObject.Find("Drop Location").GetComponent<Transform>();
         selected = false;
+        
     }
 
     private void Update()

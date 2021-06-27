@@ -24,7 +24,7 @@ public class ItemDatabase : MonoBehaviour
             new Item(0, "Diamond Sword", "A sword made with diamond.", true, "Main Hand",
             new Dictionary<string, int>
             {
-                {"Power", 15},
+                {"Power", 5},
                 {"Defence", 10}
             }),
             new Item(1, "Diamond Ore", "A beautiful diamond.", false, null,
@@ -35,13 +35,13 @@ public class ItemDatabase : MonoBehaviour
             new Item(2, "Diamond Pick", "A Pickaxe made with diamond.", true, "Main Hand",
             new Dictionary<string, int>
             {
-                {"Power", 7},
+                {"Power", 4},
                 {"Mining", 500}
             }),
             new Item(3, "Silver Pick", "A Pickaxe made with silver.", true, "Main Hand",
             new Dictionary<string, int>
             {
-                {"Power", 5},
+                {"Power", 2},
                 {"Mining", 333}
             }),
         };
