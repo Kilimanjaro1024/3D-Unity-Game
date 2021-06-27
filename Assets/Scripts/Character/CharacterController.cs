@@ -30,6 +30,7 @@ public class CharacterController : MonoBehaviour
         Look();
     }
 
+    //Fix issue with controller maintaining velocity on collision with other objects
     void MovementController(){
         if(m_IsOnGround){
             //move forward

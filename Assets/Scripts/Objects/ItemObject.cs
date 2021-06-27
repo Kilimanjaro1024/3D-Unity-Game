@@ -7,6 +7,7 @@ public class ItemObject : MonoBehaviour, IInteractable
     public string nameText;
     public int itemId;
     public Inventory inventory;
+    public bool swinging;
 
     void Awake(){
         inventory = GameObject.Find("Player").GetComponent<Inventory>();

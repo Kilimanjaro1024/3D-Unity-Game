@@ -417,6 +417,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Anim: {fileID: 560709752}
+  timer: 0
+  strong: 0
 --- !u!1 &8067707396679655975
 GameObject:
   m_ObjectHideFlags: 0

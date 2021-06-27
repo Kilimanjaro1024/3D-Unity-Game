@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 822568333}
   m_Layer: 3
   m_Name: Modle
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,6 +128,7 @@ MonoBehaviour:
   nameText: Diamond Pick
   itemId: 2
   inventory: {fileID: 0}
+  swinging: 0
 --- !u!1 &8347172401344253621
 GameObject:
   m_ObjectHideFlags: 0

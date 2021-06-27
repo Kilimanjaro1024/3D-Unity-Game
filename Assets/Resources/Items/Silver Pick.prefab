@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 3132833046787127589}
   m_Layer: 3
   m_Name: Modle
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -241,3 +241,4 @@ MonoBehaviour:
   nameText: Silver Pick
   itemId: 3
   inventory: {fileID: 0}
+  swinging: 0

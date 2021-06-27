@@ -7,25 +7,42 @@ public class MainHand : MonoBehaviour
     public Animator Anim;
     public float timer;
     public bool strong;
-    // Start is called before the first frame update
+    public ItemObject heldItem;
+    
+    // void Awake(){
+    //     UpdateHeldItem();
+    // }
     // Update is called once per frame
     void Update()
     {
-        HandleAttack();
+        if(heldItem != null){
+            SetSwinging();
+            HandleAttack();
+        }
+    }
+
+    private void SetSwinging()
+    {
+        if (Anim.GetCurrentAnimatorStateInfo(0).IsName("SwingWeapon-Quick") || Anim.GetCurrentAnimatorStateInfo(0).IsName("SwingWeapon-StrongAttack")){
+            heldItem.swinging = true;
+            Debug.Log(heldItem.swinging);
+        }
+        else{
+            heldItem.swinging = false;
+            Debug.Log("False");
+        }
     }
 
     private void HandleAttack()
     {
-        if (Input.GetButton("Fire1"))
-        {
+        if (Input.GetButton("Fire1")){
             timer += Time.deltaTime;
             if(timer >= 1){
                 strong = true;
                 Anim.SetBool("strong", true);
             }
         }
-        if (Input.GetButtonUp("Fire1"))
-        {
+        if (Input.GetButtonUp("Fire1")){
             if (strong) {
                 StrongAttack();
                 Debug.Log("STRONG");
@@ -38,6 +55,7 @@ public class MainHand : MonoBehaviour
         }
         else{
             Anim.SetBool("swing", false);
+           
         }
     }
 
@@ -49,5 +67,11 @@ public class MainHand : MonoBehaviour
     public void StrongAttack(){
         Anim.SetBool("swing", true); 
         Anim.SetBool("strong", false); 
+    }
+
+    public void UpdateHeldItem(){
+        if(gameObject.transform.GetChild(0) != null){
+            heldItem = gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<ItemObject>();
+        }
     }
 }
