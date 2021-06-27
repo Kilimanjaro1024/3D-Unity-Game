@@ -469,6 +469,7 @@ GameObject:
   - component: {fileID: 720755180}
   - component: {fileID: 720755179}
   - component: {fileID: 720755178}
+  - component: {fileID: 720755182}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -552,6 +553,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &720755182
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720755177}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c018b5eeb7309f646a8d75073a23a789, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &825706821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,10 +1416,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.53010654
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.0013170242, y: 0, z: 0}
 --- !u!23 &1535740392
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1474,9 +1494,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.0948286
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.009099007, z: 0}
 --- !u!114 &1535740396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1891,6 +1911,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 560709753, guid: 96feb5d9aba7b1742ab5fdc3effd2df9, type: 3}
+      propertyPath: quickAnim
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 560709753, guid: 96feb5d9aba7b1742ab5fdc3effd2df9, type: 3}
+      propertyPath: strongAnim
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1300920059, guid: 96feb5d9aba7b1742ab5fdc3effd2df9, type: 3}
       propertyPath: lookedAtObjectText
       value: 

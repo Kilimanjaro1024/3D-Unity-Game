@@ -5,9 +5,12 @@ using UnityEngine;
 public class MainHand : MonoBehaviour
 {
     public Animator Anim;
+    public float quickAnim;
+    public float strongAnim;
     public float timer;
     public bool strong;
     public ItemObject heldItem;
+    public int damage;
     
     void Update()
     {
@@ -19,14 +22,14 @@ public class MainHand : MonoBehaviour
 
     private void SetSwinging()
     {
-        if (Anim.GetCurrentAnimatorStateInfo(0).IsName("SwingWeapon-Quick") || Anim.GetCurrentAnimatorStateInfo(0).IsName("SwingWeapon-StrongAttack")){
-            heldItem.swinging = true;
-            Debug.Log(heldItem.swinging);
-        }
-        else{
-            heldItem.swinging = false;
-            Debug.Log("False");
-        }
+        // if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("SwingWeapon-Quick") || !Anim.GetCurrentAnimatorStateInfo(0).IsName("SwingWeapon-StrongAttack")){
+        //     heldItem.swinging = false;
+        //     Debug.Log("False");
+        // }
+        // // else{
+        // //     heldItem.swinging = false;
+        // //     Debug.Log("False");
+        // // }
     }
 
     private void HandleAttack()
@@ -36,15 +39,19 @@ public class MainHand : MonoBehaviour
             if(timer >= 1){
                 strong = true;
                 Anim.SetBool("strong", true);
+                
             }
         }
         if (Input.GetButtonUp("Fire1")){
             if (strong) {
                 StrongAttack();
-                Debug.Log("STRONG");
+                //find a way to specify the stat you are looking for
+                
             }
             else {
                 QuickAttack();
+                //find a way to specify the stat you are looking for
+                
             }
             timer = 0;
         }
@@ -55,18 +62,39 @@ public class MainHand : MonoBehaviour
     }
 
     public void QuickAttack(){
-        Debug.Log("QUICK");
-        Anim.SetBool("swing", true);  
+        Anim.SetBool("swing", true); 
+        // heldItem.swinging = true;
+        foreach (var stat in gameObject.GetComponentInChildren<Transform>().gameObject.GetComponentInChildren<ItemObject>().stats){
+            if(stat.Key.ToString() == "Power"){
+                damage = stat.Value;
+            }
+        } 
+        StartCoroutine(AnimationFinish(quickAnim));
     }
 
     public void StrongAttack(){
         Anim.SetBool("swing", true); 
-        Anim.SetBool("strong", false); 
+        // heldItem.swinging = true;
+        foreach (var stat in gameObject.GetComponentInChildren<Transform>().gameObject.GetComponentInChildren<ItemObject>().stats){
+            if(stat.Key.ToString() == "Power"){
+                damage = (int)Mathf.Ceil(stat.Value * 1.5f);
+            }
+        }
+        Anim.SetBool("strong", false);
+        StartCoroutine(AnimationFinish(strongAnim)); 
+        
     }
 
     public void UpdateHeldItem(){
         if(gameObject.transform.GetChild(0) != null){
             heldItem = gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<ItemObject>();
         }
+    }
+    
+    IEnumerator AnimationFinish(float attckDuration){
+        heldItem.swinging = true;
+        yield return new WaitForSeconds(attckDuration);
+        heldItem.swinging = false;
+
     }
 }
