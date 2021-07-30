@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 3176254876325137391}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -273,8 +273,8 @@ Rigidbody:
   m_GameObject: {fileID: 3176254876325137396}
   serializedVersion: 2
   m_Mass: 15
-  m_Drag: 2
-  m_AngularDrag: 0.05
+  m_Drag: 3
+  m_AngularDrag: 0.1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -417,8 +417,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Anim: {fileID: 560709752}
+  quickAnim: 0.5
+  strongAnim: 0.5
   timer: 0
   strong: 0
+  heldItem: {fileID: 0}
+  damage: 0
 --- !u!1 &8067707396679655975
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 
 public class NPCScript : MonoBehaviour
 {
@@ -24,6 +24,8 @@ public class NPCScript : MonoBehaviour
         if (health <= 0){
             alive = false;
             gameObject.GetComponent<Rigidbody>().freezeRotation = false;
+            gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
         }
     }
 

@@ -14,9 +14,11 @@ public class MainHand : MonoBehaviour
     
     void Update()
     {
-        if(Cursor.visible == false){
-            if(heldItem != null){
-                HandleAttack();
+        if(gameObject.tag == "Player Weapon"){
+            if(Cursor.visible == false){
+                if(heldItem != null){
+                    HandleAttack();
+                }
             }
         }
     }
@@ -36,6 +38,7 @@ public class MainHand : MonoBehaviour
     private void HandleAttack()
     {
         if (Input.GetButton("Fire1")){
+            Debug.Log("SWING");
             timer += Time.deltaTime;
             if(timer >= 1){
                 strong = true;
@@ -89,5 +92,6 @@ public class MainHand : MonoBehaviour
         heldItem.swinging = true;
         yield return new WaitForSeconds(attckDuration);
         heldItem.swinging = false;
+        Anim.SetBool("swing", false);
     }
 }

@@ -36,7 +36,7 @@ public class CharacterController : MonoBehaviour
             //move forward
             if (Input.GetKey("w"))
             {
-                print("w was pressed");
+                // print("w was pressed");
                 //Translate Method
                 // transform.Translate(Vector3.forward * Time.deltaTime * m_Speed);
 
@@ -46,7 +46,7 @@ public class CharacterController : MonoBehaviour
             //move left
             if (Input.GetKey("a"))
             {
-                print("a was pressed");
+                // print("a was pressed");
                 //Translate Method
                 // transform.Translate(Vector3.right * Time.deltaTime * -m_Speed);
 
@@ -55,7 +55,7 @@ public class CharacterController : MonoBehaviour
             //move back
             if (Input.GetKey("s"))
             {
-                print("s was pressed");
+                // print("s was pressed");
                 //Translate Method
                 // transform.Translate(Vector3.forward * Time.deltaTime * -m_Speed);
 
@@ -65,7 +65,7 @@ public class CharacterController : MonoBehaviour
             //move right
             if (Input.GetKey("d"))
             {
-                print("d was pressed");
+                // print("d was pressed");
                 //Translate Method
                 // transform.Translate(Vector3.right * Time.deltaTime * m_Speed);
 

@@ -15,10 +15,16 @@ public class NPCAIBasic : MonoBehaviour
     private RaycastHit hit;
     private bool rayHit;
     private Transform target;
-    private float combatRange = 5f;
+    private float combatRange = 3f;
     public bool alerted = false;
+    private MainHand mainHand;
+    private bool inCombat = false;
+    public float dist;
 
-    
+    void Awake(){
+        mainHand = gameObject.GetComponentInChildren<MainHand>();
+        mainHand.heldItem = gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<ItemObject>();
+    }
     void Start () {
         destNum = 0;
         agent = GetComponent<NavMeshAgent>();
@@ -27,6 +33,7 @@ public class NPCAIBasic : MonoBehaviour
     }
 
     void Update(){
+        dist = agent.remainingDistance;
         UpdateState();
         StateMachine();
         FieldOfVision();
@@ -40,6 +47,7 @@ public class NPCAIBasic : MonoBehaviour
             case AIState.Idle:
                 break;
             case AIState.Combat:
+                Combat();
                 break;
             case AIState.MovingToTarget:
                 MoveToTarget();
@@ -49,12 +57,21 @@ public class NPCAIBasic : MonoBehaviour
 
     private void UpdateState(){
         if(alerted){
-            Debug.Log("Alerted");
+            // Debug.Log("Alerted");
             curState = AIState.MovingToTarget;
+            if(agent.remainingDistance <= combatRange){
+                curState = AIState.Combat;
+            }
+            // else{
+            //     Debug.Log("OUT OF RANGE");
+            //     // agent.destination = target.position;
+            //     // curState = AIState.MovingToTarget;
+            // }
         }
     }
 
     private void Patrol(){
+        agent.stoppingDistance = 0;
         if(agent.remainingDistance < 0.5f){
             if(destinations.Count  == 0){
                 return;
@@ -66,6 +83,7 @@ public class NPCAIBasic : MonoBehaviour
     
     private void MoveToTarget(){
         agent.destination = target.position;
+        agent.stoppingDistance = 2.5f;
         if(agent.remainingDistance <= combatRange){
             curState = AIState.Combat;
         }
@@ -82,5 +100,28 @@ public class NPCAIBasic : MonoBehaviour
                 alerted = true;
             }
         }
+    }
+
+    private void Combat(){
+        // Debug.Log("IN COMBAT");
+        // Debug.Log(agent.remainingDistance);
+        // Debug.Log(agent.destination);
+        agent.destination = target.position;
+        if(agent.remainingDistance > combatRange){
+            curState = AIState.MovingToTarget;
+        }
+        StartCoroutine(CombatSequence());
+    }
+
+    IEnumerator CombatSequence(){
+        // Debug.Log(agent.remainingDistance);
+        if(agent.remainingDistance > combatRange){
+            curState = AIState.MovingToTarget;
+        }
+        mainHand.QuickAttack();
+        yield return new WaitForSeconds(3);
+        mainHand.QuickAttack();
+        StopAllCoroutines();
+        
     }
 }
