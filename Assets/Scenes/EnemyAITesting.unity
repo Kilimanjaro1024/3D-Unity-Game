@@ -494,8 +494,8 @@ MonoBehaviour:
   - {fileID: 385255363}
   - {fileID: 754790207}
   - {fileID: 1601918304}
+  curState: 0
   alerted: 0
-  dist: 0
 --- !u!54 &180870149
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1402,6 +1402,10 @@ PrefabInstance:
     - target: {fileID: 3176254876325137396, guid: 96feb5d9aba7b1742ab5fdc3effd2df9, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288652073474531039, guid: 96feb5d9aba7b1742ab5fdc3effd2df9, type: 3}
+      propertyPath: m_TagString
+      value: Player Weapon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96feb5d9aba7b1742ab5fdc3effd2df9, type: 3}

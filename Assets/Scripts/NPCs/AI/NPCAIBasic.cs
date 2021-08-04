@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum AIState {Patrol, Idle, MovingToTarget, Combat}
+public enum AIState {Patrol, Idle, MovingToTarget, Combat, Dead}
 public class NPCAIBasic : MonoBehaviour
 {
     public Transform curDestination;
     public List<Transform> destinations = new List<Transform>();
     private NavMeshAgent agent;
     private int destNum;
-    private AIState curState;
+    public AIState curState;
     private float viewDistance = 10.0f;
     private RaycastHit hit;
     private bool rayHit;
@@ -19,9 +19,11 @@ public class NPCAIBasic : MonoBehaviour
     public bool alerted = false;
     private MainHand mainHand;
     private bool inCombat = false;
-    public float dist;
+    private NPCScript npcScript;
+    // public float dist;
 
     void Awake(){
+        npcScript = gameObject.GetComponent<NPCScript>();
         mainHand = gameObject.GetComponentInChildren<MainHand>();
         mainHand.heldItem = gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<ItemObject>();
     }
@@ -33,7 +35,7 @@ public class NPCAIBasic : MonoBehaviour
     }
 
     void Update(){
-        dist = agent.remainingDistance;
+        // dist = agent.remainingDistance;
         UpdateState();
         StateMachine();
         FieldOfVision();
@@ -52,21 +54,28 @@ public class NPCAIBasic : MonoBehaviour
             case AIState.MovingToTarget:
                 MoveToTarget();
                 break;
+            case AIState.Dead:
+                break;
         }
     }
 
     private void UpdateState(){
-        if(alerted){
-            // Debug.Log("Alerted");
-            curState = AIState.MovingToTarget;
-            if(agent.remainingDistance <= combatRange){
-                curState = AIState.Combat;
-            }
-            // else{
-            //     Debug.Log("OUT OF RANGE");
-            //     // agent.destination = target.position;
-            //     // curState = AIState.MovingToTarget;
-            // }
+        if(npcScript.alive){
+            if(alerted){
+                // Debug.Log("Alerted");
+                curState = AIState.MovingToTarget;
+                if(agent.remainingDistance <= combatRange){
+                    curState = AIState.Combat;
+                }
+                // else{
+                //     Debug.Log("OUT OF RANGE");
+                //     // agent.destination = target.position;
+                //     // curState = AIState.MovingToTarget;
+                // }
+            }  
+        }
+        else{
+            curState = AIState.Dead;
         }
     }
 

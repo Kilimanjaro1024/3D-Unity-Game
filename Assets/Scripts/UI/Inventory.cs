@@ -18,26 +18,13 @@ public class Inventory : MonoBehaviour
         inventoryUI.gameObject.SetActive(false);
     }
 
-    void Update()
-    {
+    void Update(){
         UIController();
     }
 
-    private void UIController()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            controller.enabled = !controller.enabled;
-            if (!controller.enabled)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+    public void UIController(){
+        if (Input.GetKeyDown(KeyCode.I)){
+            controller.m_Pause = !controller.m_Pause;
             inventoryUI.gameObject.SetActive(!inventoryUI.gameObject.activeSelf);
         }
     }

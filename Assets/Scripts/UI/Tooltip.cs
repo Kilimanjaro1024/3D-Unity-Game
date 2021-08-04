@@ -11,7 +11,6 @@ public class Tooltip : MonoBehaviour
         tooltipText = GetComponentInChildren<Text>();
         gameObject.SetActive(false);
     }
-
     public void GenerateTooltip(Item item){
         string statText = "";
         if(item.stats.Count > 0){

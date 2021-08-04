@@ -26,6 +26,11 @@ public class NPCScript : MonoBehaviour
             gameObject.GetComponent<Rigidbody>().freezeRotation = false;
             gameObject.GetComponent<Rigidbody>().isKinematic = false;
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Rigidbody>().useGravity = true;
+            gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<Rigidbody>().useGravity = true;
+            gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = false;
+            gameObject.transform.GetChild(0).GetComponent<Animator>().enabled = false;
+            Debug.Log(gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0));
         }
     }
 

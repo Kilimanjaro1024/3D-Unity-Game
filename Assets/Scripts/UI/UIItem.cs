@@ -17,6 +17,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     private bool selected;
     public bool equipped;
     public Player player;
+    public LootObject lootObject;
 
     private void Awake(){
         spriteImage = GetComponent<Image>();
@@ -120,14 +121,26 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         //Pick up and move an item in the inventory
         if(eventData.button == PointerEventData.InputButton.Left){
             if(this.item != null){
-                if(selectedItem.item != null){
-                    Item clone = new Item(selectedItem.item);
-                    selectedItem.UpdateItem(this.item);
-                    UpdateItem(clone);
+                if(this.gameObject.tag == "Loot"){
+                    //  Item clone = new Item(selectedItem.item);
+                    inventory.GiveItem(this.item.id);
+                    UpdateItem(null);
+                    lootObject.loot.RemoveAt(0);
+                    lootObject.items.RemoveAt(0);
+                    Debug.Log(lootObject.loot.Count);
+                    Debug.Log("This is loot");
                 }
                 else{
-                    selectedItem.UpdateItem(this.item);
-                    UpdateItem(null);
+                    if(selectedItem.item != null){
+                        
+                        Item clone = new Item(selectedItem.item);
+                        selectedItem.UpdateItem(this.item);
+                        UpdateItem(clone);
+                    }
+                    else{
+                        selectedItem.UpdateItem(this.item);
+                        UpdateItem(null);
+                    }
                 }
             }
             else if(selectedItem.item != null){
@@ -147,6 +160,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
 
     public void OnPointerEnter(PointerEventData eventData){
         if(this.item != null){
+            
             tooltip.GenerateTooltip(this.item);
             selected = true;
         }

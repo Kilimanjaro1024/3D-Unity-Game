@@ -10,6 +10,7 @@ public class CharacterController : MonoBehaviour
     Vector2 m_Rotation = Vector2.zero;
     float m_LookSpeed;
     bool m_IsOnGround;
+    public bool m_Pause;
     public Vector3 moveDirection = Vector3.zero;
     // Start is called before the first frame update
     void Start()
@@ -25,9 +26,22 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PauseController();
+        if(!m_Pause){
+            MovementController();
+            Look();
+        }
+    }
 
-        MovementController();
-        Look();
+    void PauseController(){
+        if (m_Pause){
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else{
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     //Fix issue with controller maintaining velocity on collision with other objects
