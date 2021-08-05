@@ -120,13 +120,16 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
     public void OnPointerClick(PointerEventData eventData){
         //Pick up and move an item in the inventory
         if(eventData.button == PointerEventData.InputButton.Left){
+            
             if(this.item != null){
                 if(this.gameObject.tag == "Loot"){
                     //  Item clone = new Item(selectedItem.item);
                     inventory.GiveItem(this.item.id);
+                    Debug.Log(item.title);
+                    lootObject.loot.Remove(item);
                     UpdateItem(null);
-                    lootObject.loot.RemoveAt(0);
-                    lootObject.items.RemoveAt(0);
+                    // lootObject.loot.RemoveAt(0);
+                    // lootObject.items.RemoveAt(0);
                     Debug.Log(lootObject.loot.Count);
                     Debug.Log("This is loot");
                 }

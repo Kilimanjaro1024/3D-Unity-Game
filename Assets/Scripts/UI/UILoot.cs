@@ -10,6 +10,7 @@ public class UILoot : MonoBehaviour
     public Transform slotPanel;
     public LootObject lootObject;
     public int numberOfSlots = 5;
+    public List<GameObject> slots = new List<GameObject>();
     // public int itemsDropped;
 
     void Awake(){
@@ -17,29 +18,28 @@ public class UILoot : MonoBehaviour
             GameObject instance = Instantiate(slotPrefab);
             instance.transform.SetParent(slotPanel);
             uIItems.Add(instance.GetComponentInChildren<UIItem>());
-            instance.SetActive(false);
+            slots.Add(instance);
+            // instance.SetActive(false);
         }
-        // for (int i = 0; i < numberOfSlots; i++)
-        // {
-        //     Debug.Log("disabled");
-        //     uIItems[i].gameObject.GetComponentInParent<GameObject>().gameObject.SetActive(false);
-        // }
+        DisableSlots();
         gameObject.SetActive(false);
     }
 
-    // void Awake(){
-    //     itemsDropped = lootObject.itemsToDrop;
-        
-    // }
+    public void DisableSlots(){
+        foreach (var item in slots)
+        {
+            item.SetActive(false);
+        }
+    }
 
     public void DetermineSlots(int itemsDropped){
+        DisableSlots();
         for (int i = 0; i < itemsDropped; i++)
         {
             uIItems[i].transform.parent.gameObject.SetActive(true);
             uIItems[i].gameObject.tag = "Loot";
         }
     }
-
     
     public void UpdateSlot(int slot, Item item){
         uIItems[slot].UpdateItem(item);

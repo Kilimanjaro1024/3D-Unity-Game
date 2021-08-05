@@ -5,7 +5,6 @@ using UnityEngine;
 public class LootObject : MonoBehaviour, IInteractable
 {
     public List<Item> loot = new List<Item>();
-    public List<UIItem> items = new List<UIItem>();
     public int[] table = { 
         60,
         30, 
@@ -23,35 +22,27 @@ public class LootObject : MonoBehaviour, IInteractable
     public ItemDatabase itemDatabase;
     public CharacterController controller;
     public GameObject invetoryUI;
-    public bool Looted;
-
     public GameObject slotPrefab;
-    // void Update(){
-    //     Debug.Log(loot.Count);
-    // }
+    
     void Awake(){
-        // invetoryUI = GameObject.Find("InevtoryPanel").GetComponent<GameObject>();
+        foreach (var item in table){
+            total += item;
+        }
         for (int y = 0; y < itemsToDrop; y++){
-            foreach (var item in table){
-                total += item;
-            }
             randomNumber = Random.Range(0,total);
-                for (int x = 0; x < table.Length; x++){
-                    if(randomNumber <= table[x]){
-                        GameObject instance = Instantiate(slotPrefab);
-                        Debug.Log(lootTable[x]);
-                        Item itemToAdd = itemDatabase.GetItem(lootTable[x]);
-                        Debug.Log(itemToAdd);
-                        loot.Add(itemToAdd);
-                        items.Add(instance.GetComponentInChildren<UIItem>());
-                        // lootUI.GetComponent<UILoot>().AddNewItem(itemToAdd);
-                        
-                        // return;
-                    }
-                    else{
-                        randomNumber -= table[x];
-                    }
+            for (int x = 0; x < table.Length; x++){
+                if(randomNumber <= table[x]){
+                    // GameObject instance = Instantiate(slotPrefab);
+                    Debug.Log(lootTable[x]);
+                    Item itemToAdd = itemDatabase.GetItem(lootTable[x]);
+                    Debug.Log(itemToAdd);
+                    loot.Add(itemToAdd);
+                    break;
                 }
+                else{
+                    randomNumber -= table[x];
+                }
+            }
         }
     }
 
@@ -69,10 +60,17 @@ public class LootObject : MonoBehaviour, IInteractable
 
     public void DoActivate()
     {
+        for (int i = 0; i < lootUI.GetComponent<UILoot>().uIItems.Count; i++)
+        {
+            lootUI.GetComponent<UILoot>().uIItems[i].UpdateItem(null);
+        }
+        
         lootUI.GetComponent<UILoot>().lootObject = gameObject.GetComponent<LootObject>();
         lootUI.GetComponent<UILoot>().DetermineSlots(itemsToDrop);
+        Debug.Log(loot.Count);
         UIController();
         for (int i = 0; i < loot.Count; i++){
+            Debug.Log(loot[i]);
             lootUI.GetComponent<UILoot>().AddNewItem(loot[i]);
             Debug.Log(lootUI.GetComponent<UILoot>().uIItems[i]);
             lootUI.GetComponent<UILoot>().uIItems[i].lootObject = gameObject.GetComponent<LootObject>();

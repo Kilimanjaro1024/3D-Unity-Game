@@ -292,6 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b59283b1c1e2e41bdd6d3497d9f33a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Pause: 0
   moveDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &1539705733217803800
 MonoBehaviour:
